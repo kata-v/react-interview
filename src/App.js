@@ -1,4 +1,6 @@
 import React from 'react';
+import ItemList from './Components/ItemList/ItemList';
+import AddNewItem from './Components/AddNewItem/AddNewItem';
 import './App.css';
 
 const todos = [
@@ -18,6 +20,7 @@ class App extends React.Component {
         };
     }
 
+    //app functions
     generateNewId() {
         return this.state.todos.length + 1;
     }
@@ -34,7 +37,7 @@ class App extends React.Component {
 
         this.setState({todos: newTodos, newTodoName: ''});
     }
-
+//moved to itemlist
     onClick(id) {
         var todoItems = this.state.todos.slice();
         for (let i = 0; i < this.state.todos.length; i++) {
@@ -52,6 +55,7 @@ class App extends React.Component {
     onChange(event) {
         this.setState({newTodoName: event.target.value});
     }
+    //moved to itemlist
     onRemoveClick(id) {
         //implement this logic
         console.log('Remove Item!');
@@ -66,10 +70,11 @@ class App extends React.Component {
                     newTodoName={this.state.newTodoName}
                     onInputChange={this.onChange.bind(this)}
                 />
+                <ItemList dataFromApp={todos} />
             </div>
         );
     }
-
+//This is the item list
     todoItems = () => {
         var retVal = [];
 
@@ -87,7 +92,7 @@ class App extends React.Component {
         return retVal;
     };
 }
-
+//This is the individual task
 class Hello extends React.Component {
     render() {
         var color;
@@ -121,6 +126,7 @@ class Hello extends React.Component {
     }
 }
 
+//How to add new task
 class Bar extends React.Component {
     render() {
         return (
