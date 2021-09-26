@@ -1,0 +1,15 @@
+input {
+    border-radius: 20px;
+    border: solid 3px;
+    border-color: #444;
+    padding-left: 10px;
+}
+input:focus {
+    outline: none;
+    border-color: limegreen ;
+}
+
+.btn-success {
+    background-color: green;
+    height:40px;
+  }

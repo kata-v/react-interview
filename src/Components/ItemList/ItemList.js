@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TaskItem from '../TaskItem/TaskItem';
 import AddNewItem from '../AddNewItem/AddNewItem';
+import './ItemList.css';
 
 const ItemList = ({dataFromApp}) => {
     console.log('This comes from app' + dataFromApp)
@@ -65,8 +66,10 @@ const ItemList = ({dataFromApp}) => {
         } 
 
     return (
-        <div>
-            {retVal}
+        <div >
+            <div className="task-list">
+                {retVal}
+            </div>
             <AddNewItem onSubmit={onSubmit} onChange={onChange} newTodoName={newTodoName}/>
         </div>
     );

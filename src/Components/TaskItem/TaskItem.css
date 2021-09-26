@@ -1,0 +1,9 @@
+.task-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-left: 1.5rem;
+}
+
+.btn-task{
+    background-color: #444;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './TaskItem.css';
 
 const TaskItem = ({todo, isItDone, change, remove}) => {
 
@@ -10,20 +10,20 @@ const TaskItem = ({todo, isItDone, change, remove}) => {
             color = 'lightgreen';
             text = 'Complete';
         } else {
-            color = 'pink';
+            color = 'lightblue';
             text = 'Incomplete';
         }
 
     return (
         <div className="wrapper" style={{backgroundColor: color}}>
-                <h3>{todo}</h3>
+                <p className="task-title">{todo}</p>
                 <button
-                    className="btn"
+                    className="btn btn-task"
                     onClick={change}>
                     {text}
                 </button>
                 <button
-                    className="btn"
+                    className="btn btn-task"
                     onClick={remove}>
                     Remove from list
                 </button>
