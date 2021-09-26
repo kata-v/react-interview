@@ -1,4 +1,5 @@
 import React from 'react';
+import './AddNewItem.css';
 
 const AddNewItem = ({onSubmit, onChange, newTodoName}) => {
     return (
