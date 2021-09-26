@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import TaskItem from '../TaskItem/TaskItem';
 import AddNewItem from '../AddNewItem/AddNewItem';
 
 const ItemList = ({dataFromApp}) => {
     console.log('This comes from app' + dataFromApp)
     const [themItems, setThemItems] = useState(dataFromApp); 
-    console.log('This it the state ' + themItems);
-    console.log('The lenght of the state ' +themItems.length)
+    const [newTodoName, setNewTodoName] = useState('');
+    console.log('This is the state ' + themItems);
+    console.log('The lenght of the state ' + themItems.length)
     console.log(dataFromApp.length);
 
    const onDoneClick = (id) => {
@@ -33,21 +34,24 @@ const ItemList = ({dataFromApp}) => {
    const onSubmit = (event) =>{
         event.preventDefault();
 
-        var newTodos = themItems.slice();
+        let newTodos = themItems.slice();
         newTodos.push({
             id: generateNewId(),
-            name: this.state.newTodoName,
+            name: newTodoName,
             complete: false
         });
-
-        this.setState({todos: newTodos, newTodoName: ''});
+        console.log('This is the new item list: ' + newTodos)
+        setThemItems(newTodos); setNewTodoName('');
     }
 
+    const onChange= (event) => {
+        setNewTodoName(event.target.value);
+    }
 
     let retVal = [];
     console.log(retVal)
-        for (let i = 0; i < dataFromApp.length; i++) {
-            let todo = dataFromApp[i];
+        for (let i = 0; i < themItems.length; i++) {
+            let todo = themItems[i];
             retVal.push(
                 <TaskItem
                     key={todo.id}
@@ -62,9 +66,8 @@ const ItemList = ({dataFromApp}) => {
 
     return (
         <div>
-            <p>This is the itemlist!</p>
             {retVal}
-            <AddNewItem/>
+            <AddNewItem onSubmit={onSubmit} onChange={onChange} newTodoName={newTodoName}/>
         </div>
     );
 }
