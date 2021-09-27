@@ -15,7 +15,6 @@ const App = () => {
     
         return (
             <div className="">
-                <h1>Hi there!</h1>
                 <ItemList dataFromApp={todos} />
             </div>
         );
