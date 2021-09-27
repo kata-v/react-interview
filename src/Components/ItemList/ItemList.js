@@ -7,9 +7,7 @@ const ItemList = ({dataFromApp}) => {
     console.log('This comes from app' + dataFromApp)
     const [themItems, setThemItems] = useState(dataFromApp); 
     const [newTodoName, setNewTodoName] = useState('');
-    console.log('This is the state ' + themItems);
-    console.log('The lenght of the state ' + themItems.length)
-    console.log(dataFromApp.length);
+    const [newId, setNewId] = useState(dataFromApp.length)
 
    const onDoneClick = (id) => {
         var todoItems = themItems.slice();
@@ -26,10 +24,19 @@ const ItemList = ({dataFromApp}) => {
     const onRemoveClick = (id) => {
         //implement this logic
         console.log('Remove Item!' + id);
-    }
 
+        let taskRemoved = themItems.filter(function(x){
+            return x.id != id;
+        });
+        console.log('This is the new array' + taskRemoved);
+        console.log(themItems);
+        setThemItems(taskRemoved);        
+    }
+    
    const generateNewId = () => {
-        return themItems.length + 1;
+        let getNewId = newId + 1;        
+        setNewId(getNewId);
+        return getNewId;
     }
 
    const onSubmit = (event) =>{
@@ -61,8 +68,7 @@ const ItemList = ({dataFromApp}) => {
                     change={() => onDoneClick(todo.id)}
                     remove={() => onRemoveClick(todo.id)}
                 />
-            );
-            console.log('This round of' + retVal)
+            );            
         } 
 
     return (
