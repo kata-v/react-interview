@@ -4,33 +4,28 @@ import AddNewItem from '../AddNewItem/AddNewItem';
 import './ItemList.css';
 
 const ItemList = ({dataFromApp}) => {
-    console.log('This comes from app' + dataFromApp)
-    const [themItems, setThemItems] = useState(dataFromApp); 
+    const [itemList, setItemList] = useState(dataFromApp); 
     const [newTodoName, setNewTodoName] = useState('');
     const [newId, setNewId] = useState(dataFromApp.length)
 
    const onDoneClick = (id) => {
-        var todoItems = themItems.slice();
-        for (let i = 0; i < themItems.length; i++) {
+        let todoItems = itemList.map((i) => {
             if (todoItems[i].id === id) {
-                var newComplete = !todoItems[i].complete;
+                let newComplete = !todoItems[i].complete;
                 todoItems[i].complete = newComplete;
             }
-        }
-
-        setThemItems(todoItems);
-    }
+        });
+        setItemList(todoItems);
+     };
+    
 
     const onRemoveClick = (id) => {
         //implement this logic
-        console.log('Remove Item!' + id);
-
-        let taskRemoved = themItems.filter(function(x){
-            return x.id != id;
+        let taskRemoved = itemList.filter(function(x){
+            return x.id !== id;
         });
-        console.log('This is the new array' + taskRemoved);
-        console.log(themItems);
-        setThemItems(taskRemoved);        
+
+        setItemList(taskRemoved);        
     }
     
    const generateNewId = () => {
@@ -42,14 +37,13 @@ const ItemList = ({dataFromApp}) => {
    const onSubmit = (event) =>{
         event.preventDefault();
 
-        let newTodos = themItems.slice();
-        newTodos.push({
+        let newTodos = [...itemList, {
             id: generateNewId(),
             name: newTodoName,
             complete: false
-        });
-        console.log('This is the new item list: ' + newTodos)
-        setThemItems(newTodos); setNewTodoName('');
+        }]
+        
+        setItemList(newTodos); setNewTodoName('');
     }
 
     const onChange= (event) => {
@@ -58,8 +52,8 @@ const ItemList = ({dataFromApp}) => {
 
     let retVal = [];
     console.log(retVal)
-        for (let i = 0; i < themItems.length; i++) {
-            let todo = themItems[i];
+        for (let i = 0; i < itemList.length; i++) {
+            let todo = itemList[i];
             retVal.push(
                 <TaskItem
                     key={todo.id}
